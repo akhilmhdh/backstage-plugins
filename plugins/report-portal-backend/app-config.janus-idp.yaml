@@ -1,0 +1,6 @@
+reportPortal:
+  integrations:
+    - host: ${REPORT_PORTAL_HOST}
+      baseUrl: ${REPORT_PORTAL_BASE_URL}
+      token: ${REPORT_PORTAL_TOKEN}
+      filterType: ${REPORT_PORTAL_FILTER_TYPE}

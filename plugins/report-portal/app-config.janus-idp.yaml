@@ -1,0 +1,13 @@
+dynamicPlugins:
+  frontend:
+    janus-idp.backstage-plugin-report-portal:
+      apiFactories: []
+      appIcons: []
+      dynamicRoutes: []
+      mountPoints: []
+      routeBindings: []
+reportPortal:
+  supportEmail: ${REPORT_PORTAL_SUPPORT_MAIL}
+  integrations:
+    - host: ${REPORT_PORTAL_HOST}
+      filterType: ${REPORT_PORTAL_FILTER_TYPE}
