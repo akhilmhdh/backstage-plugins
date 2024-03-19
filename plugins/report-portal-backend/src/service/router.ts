@@ -14,7 +14,7 @@ export interface RouterOptions {
 export async function createRouter(
   options: RouterOptions,
 ): Promise<express.Router> {
-  const { logger, config } = options;
+  const { config } = options;
   const hostsConfig = config.getConfigArray('reportPortal.integrations');
 
   const router = Router();

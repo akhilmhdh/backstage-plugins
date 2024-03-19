@@ -6,6 +6,7 @@ export interface Config {
     integrations: Array<{
       /**
        * Host of report portal url
+       * @visibility frontend
        */
       host: string;
       /**
@@ -17,6 +18,11 @@ export interface Config {
        * @visibility secret
        */
       token: string;
+      /**
+       * Filter type to apply for current host
+       * @visibility frontend
+       */
+      filterType: string;
     }>;
   };
 }

@@ -6,3 +6,7 @@ dynamicPlugins:
       dynamicRoutes: []
       mountPoints: []
       routeBindings: []
+reportPortal:
+  integrations:
+    - host: ${REPORT_PORTAL_HOST}
+      filterType: ${REPORT_PORTAL_FILTER_TYPE}
