@@ -1,6 +1,10 @@
 import { ApiRef, createApiRef } from '@backstage/core-plugin-api';
 
-import { LaunchDetailsResp, ProjectDetails } from './types';
+import {
+  LaunchDetailsResponse,
+  ProjectDetails,
+  ProjectListResponse,
+} from './types';
 
 /** @public */
 export const reportPortalApiRef: ApiRef<ReportPortalApi> = createApiRef({
@@ -8,13 +12,18 @@ export const reportPortalApiRef: ApiRef<ReportPortalApi> = createApiRef({
 });
 
 export type ReportPortalApi = {
+  getReportPortalBaseUrl: (host: string) => string;
   getLaunchResults: (
     projectId: string,
-    filter: string,
     host: string,
-  ) => Promise<LaunchDetailsResp>;
+    filters: { [key: string]: string | number } | undefined,
+  ) => Promise<LaunchDetailsResponse>;
   getProjectDetails: (
     projectId: string,
     host: string,
   ) => Promise<ProjectDetails>;
+  getInstanceDetails: (
+    host: string,
+    filters: { [key: string]: string | number } | undefined,
+  ) => Promise<ProjectListResponse>;
 };

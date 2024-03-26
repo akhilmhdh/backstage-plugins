@@ -14,10 +14,13 @@ export function useProjectDetails(
 
   React.useEffect(() => {
     setLoading(true);
-    reportPortalApi.getProjectDetails(projectId, host).then(resp => {
-      setProjectDetails(resp);
-      setLoading(false);
-    });
+    reportPortalApi
+      .getProjectDetails(projectId, host)
+      .then(resp => {
+        setProjectDetails(resp);
+        setLoading(false);
+      })
+      .catch(err => err);
   }, [projectId, reportPortalApi, host]);
 
   return { loading, projectDetails };

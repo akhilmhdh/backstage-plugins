@@ -4,7 +4,6 @@ import { createDevApp } from '@backstage/dev-utils';
 import {
   EntityAboutCard,
   EntityHasSubcomponentsCard,
-  EntityLayout,
   EntityLinksCard,
 } from '@backstage/plugin-catalog';
 import { EntityProvider } from '@backstage/plugin-catalog-react';

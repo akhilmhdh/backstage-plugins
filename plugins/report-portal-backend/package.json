@@ -1,6 +1,6 @@
 {
   "name": "@appdev-platform/backstage-plugin-report-portal-backend",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "src/index.ts",
   "types": "src/index.ts",
   "license": "Apache-2.0",
@@ -40,7 +40,7 @@
     "tsc": "tsc"
   },
   "dependencies": {
-    "@backstage/backend-common": "^0.19.8",
+    "@backstage/backend-common": "^0.21.0",
     "@backstage/backend-plugin-api": "^0.6.6",
     "@backstage/backend-plugin-manager": "npm:@janus-idp/backend-plugin-manager@0.0.2-janus.5",
     "@backstage/config": "^1.1.1",
@@ -70,13 +70,13 @@
   "configSchema": "config.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/janus-idp/backstage-plugins",
-    "directory": "plugins/report-portal"
+    "url": "https://github.com/appdev-platform/backstage-plugins",
+    "directory": "plugins/report-portal-backend"
   },
   "keywords": [
     "backstage",
     "plugin"
   ],
   "homepage": "https://janus-idp.io/",
-  "bugs": "https://github.com/janus-idp/backstage-plugins/issues"
+  "bugs": "https://github.com/appdev-platform/backstage-plugins/issues"
 }

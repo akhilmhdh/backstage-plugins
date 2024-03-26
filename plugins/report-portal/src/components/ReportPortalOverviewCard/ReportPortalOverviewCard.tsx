@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import MultiProgress from 'react-multi-progress';
 
 import { InfoCard, InfoCardVariants } from '@backstage/core-components';
+import { configApiRef, useApi } from '@backstage/core-plugin-api';
 import { useEntity } from '@backstage/plugin-catalog-react';
 
 import {
@@ -18,6 +19,7 @@ import {
 import { Skeleton } from '@material-ui/lab';
 
 import { useLaunchDetails, useProjectDetails } from '../../hooks';
+import { isReportPortalAvailable } from '../../utils/isReportPortalAvailable';
 
 const HeaderComponent = (props: { total: number }) => {
   return (
@@ -74,19 +76,30 @@ const useStyles = makeStyles({
 export const ReportPortalOverviewCard = (props: {
   variant: InfoCardVariants;
 }) => {
-  const { entity } = useEntity();
   const classes = useStyles();
+  const config = useApi(configApiRef);
+  const hostsConfig = config.getConfigArray('reportPortal.integrations');
+
+  const { entity } = useEntity();
   const projectId =
     entity.metadata.annotations?.['reportportal.io/project-name'] ?? '';
   const launchName =
     entity.metadata.annotations?.['reportportal.io/launch-name'] ?? '';
-  const hostName = entity.metadata.annotations?.['reportportal.io/host'] ?? '';
+  const hostName =
+    entity.metadata.annotations?.['reportportal.io/host'] ??
+    hostsConfig[0].getString('host');
+
   const [defects, setDefects] = useState<Defect[]>([]);
+  const [filters, _] = useState<{ [key: string]: string | number } | undefined>(
+    {
+      'filter.eq.name': launchName,
+    },
+  );
 
   const { loading, launchDetails } = useLaunchDetails(
     projectId,
-    launchName,
     hostName,
+    filters,
   );
   const { loading: projectLoading, projectDetails } = useProjectDetails(
     projectId,
@@ -111,6 +124,8 @@ export const ReportPortalOverviewCard = (props: {
       setDefects(tempArr);
     }
   }, [loading, launchDetails, projectDetails]);
+
+  if (!isReportPortalAvailable(entity)) return null;
 
   return (
     <InfoCard

@@ -1,5 +1,5 @@
 import { createServiceBuilder } from '@backstage/backend-common';
-import { Config, ConfigReader } from '@backstage/config';
+import { ConfigReader } from '@backstage/config';
 
 import { Logger } from 'winston';
 
