@@ -6,8 +6,8 @@ import { LaunchDetails, reportPortalApiRef } from '../api';
 
 export function useLaunchDetails(
   projectId: string,
-  launchName: string,
   hostName: string,
+  filters: { [key: string]: string | number } | undefined,
 ) {
   const reportPortalApi = useApi(reportPortalApiRef);
   const [loading, setLoading] = useState(true);
@@ -15,13 +15,11 @@ export function useLaunchDetails(
 
   useEffect(() => {
     setLoading(true);
-    reportPortalApi
-      .getLaunchResults(projectId, launchName, hostName)
-      .then(res => {
-        setLaunchDetails(res.content[0]);
-        setLoading(false);
-      });
-  }, [projectId, launchName, hostName, reportPortalApi]);
+    reportPortalApi.getLaunchResults(projectId, hostName, filters).then(res => {
+      setLaunchDetails(res.content[0]);
+      setLoading(false);
+    });
+  }, [filters, projectId, hostName, reportPortalApi]);
 
   return { loading, launchDetails };
 }
