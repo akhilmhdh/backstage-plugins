@@ -3,7 +3,7 @@
   "include": ["src", "dev", "migrations"],
   "exclude": ["node_modules"],
   "compilerOptions": {
-    "outDir": "../../dist-types/plugins/report-portal",
+    "outDir": "../../dist-types/plugins/report-portal-backend",
     "rootDir": "."
   }
 }
