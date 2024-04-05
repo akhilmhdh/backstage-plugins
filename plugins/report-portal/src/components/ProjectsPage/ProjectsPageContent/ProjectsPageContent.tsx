@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react';
 
-import { Link, Table, TableColumn } from '@backstage/core-components';
+import {
+  ErrorPanel,
+  Link,
+  Table,
+  TableColumn,
+} from '@backstage/core-components';
 import { configApiRef, useApi, useRouteRef } from '@backstage/core-plugin-api';
 
 import { IconButton } from '@material-ui/core';
@@ -58,6 +63,8 @@ export const ProjectsPageContent = (props: { host: string }) => {
   });
   const reportPortalApi = useApi(reportPortalApiRef);
 
+  const [error, setError] = useState<any>();
+
   useEffect(() => {
     if (loading) {
       reportPortalApi
@@ -69,6 +76,10 @@ export const ProjectsPageContent = (props: { host: string }) => {
         .then(res => {
           setTableData({ ...res });
           setLoading(false);
+        })
+        .catch(err => {
+          setLoading(false);
+          setError(err);
         });
     }
   });
@@ -119,6 +130,8 @@ export const ProjectsPageContent = (props: { host: string }) => {
         setLoading(false);
       });
   }
+
+  if (error) return <ErrorPanel error={error} />;
 
   return (
     <Table

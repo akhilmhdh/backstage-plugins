@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { Table, TableColumn } from '@backstage/core-components';
+import { ErrorPanel, Table, TableColumn } from '@backstage/core-components';
 import { useApi } from '@backstage/core-plugin-api';
 
 import { IconButton, Link } from '@material-ui/core';
@@ -45,6 +45,7 @@ export const LaunchesPageContent = (props: {
     },
   });
 
+  const [error, setError] = useState<any>();
   useEffect(() => {
     setLoading(true);
     reportPortalApi
@@ -55,6 +56,10 @@ export const LaunchesPageContent = (props: {
       })
       .then(res => {
         responseHandler(res);
+      })
+      .catch(err => {
+        setLoading(false);
+        setError(err);
       });
   }, [host, project, reportPortalApi]);
 
@@ -68,6 +73,10 @@ export const LaunchesPageContent = (props: {
       })
       .then(res => {
         responseHandler(res);
+      })
+      .catch(err => {
+        setError(err);
+        setLoading(false);
       });
   }
 
@@ -157,6 +166,7 @@ export const LaunchesPageContent = (props: {
       ),
     },
   ];
+  if (error) return <ErrorPanel error={error} />;
   return (
     <Table
       title="Launches"

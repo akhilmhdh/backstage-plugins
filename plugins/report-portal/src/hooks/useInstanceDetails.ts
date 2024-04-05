@@ -25,7 +25,8 @@ export function useInstanceDetails(host: string, filterType: string) {
       .then(res => {
         setProjectListData(res);
         setLoading(false);
-      });
+      })
+      .catch(err => err);
   }, [host, reportPortalApi, filterType]);
 
   return { loading, projectListData };
