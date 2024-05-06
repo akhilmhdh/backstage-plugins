@@ -1,6 +1,8 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
+import { Content, PageWithHeader } from '@backstage/core-components';
+
 import { launchRouteRef, projectsRouteRef } from '../routes';
 import { LaunchesPage } from './LaunchesPage';
 import { ProjectsPage } from './ProjectsPage';
@@ -13,8 +15,14 @@ export const Router = (props: ReportPortalGlobalPageProps) => {
   return (
     <Routes>
       <Route path="/*" element={<ReportPortalGlobalPage {...props} />} />
-      <Route path={projectsRouteRef.path} element={<ProjectsPage />} />
-      <Route path={launchRouteRef.path} element={<LaunchesPage />} />
+      <Route
+        path={projectsRouteRef.path}
+        element={<ProjectsPage themeId={props.theme} />}
+      />
+      <Route
+        path={launchRouteRef.path}
+        element={<LaunchesPage themeId={props.theme} />}
+      />
     </Routes>
   );
 };

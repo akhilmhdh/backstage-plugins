@@ -72,6 +72,9 @@ It is only meant for local development, and the setup for it can be found inside
 
   ```yaml
   reportPortal:
+    # Contact email for support
+    supportEmail: ${REPORT_PORTAL_SUPPORT_MAIL}
+
     # under integrations you can configure-
     # multiple instances of report portal
     integrations:

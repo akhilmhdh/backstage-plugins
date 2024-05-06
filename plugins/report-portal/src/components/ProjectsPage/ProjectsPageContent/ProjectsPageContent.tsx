@@ -86,8 +86,9 @@ export const ProjectsPageContent = (props: { host: string }) => {
 
   const columns: TableColumn<ProjectDetails>[] = [
     {
+      id: 0,
       title: 'Project',
-      field: 'name',
+      field: 'projectName',
       render: row => (
         <Link
           to={`${launchPageRoute()}?host=${host}&project=${row.projectName}`}
@@ -96,13 +97,16 @@ export const ProjectsPageContent = (props: { host: string }) => {
         </Link>
       ),
       width: '60%',
+      searchable: true,
     },
     {
+      id: 1,
       title: 'Launches',
       width: '30%',
       render: row => <UniqueLaunches host={host} projectId={row.projectName} />,
     },
     {
+      id: 2,
       title: 'Actions',
       align: 'center',
       render: row => (
@@ -135,18 +139,19 @@ export const ProjectsPageContent = (props: { host: string }) => {
 
   return (
     <Table
-      isLoading={loading}
       options={{
         padding: 'dense',
         pageSize: tableData.page.size,
         paginationPosition: 'both',
+        searchFieldVariant: 'outlined',
       }}
       title="Projects"
       columns={columns}
       data={tableData.content}
+      page={tableData.page.number - 1}
       totalCount={tableData.page.totalElements}
       onPageChange={handlePageChange}
-      page={tableData.page.number - 1}
+      isLoading={loading}
     />
   );
 };

@@ -169,15 +169,15 @@ export const LaunchesPageContent = (props: {
   if (error) return <ErrorPanel error={error} />;
   return (
     <Table
-      title="Launches"
       options={{
         pageSizeOptions: [5, 10, 20],
-        sorting: false,
+        sorting: true,
         pageSize: tableData.page.size,
         searchFieldVariant: 'outlined',
         padding: 'dense',
         paginationPosition: 'both',
       }}
+      title="Latest Launches"
       columns={columns}
       data={tableData?.launches ?? []}
       page={tableData?.page.number - 1}

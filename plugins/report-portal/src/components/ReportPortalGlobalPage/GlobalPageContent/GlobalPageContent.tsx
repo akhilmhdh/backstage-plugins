@@ -103,7 +103,7 @@ export const GlobalPageContent = () => {
     <Table
       title="Instances"
       columns={columns}
-      options={{ padding: 'dense' }}
+      options={{ padding: 'dense', searchFieldVariant: 'outlined' }}
       data={instanceData}
     />
   );
