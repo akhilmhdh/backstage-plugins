@@ -5,17 +5,12 @@ import {
   Breadcrumbs,
   Content,
   Header,
-  HeaderIconLinkRow,
-  HeaderLabel,
-  IconLinkVertical,
-  LinkButton,
   Page,
   useQueryParamState,
 } from '@backstage/core-components';
 import { useRouteRef } from '@backstage/core-plugin-api';
 
-import { Box, Button, createStyles, makeStyles } from '@material-ui/core';
-import Assessment from '@material-ui/icons/Assessment';
+import { Button, makeStyles } from '@material-ui/core';
 import Launch from '@material-ui/icons/Launch';
 
 import { rootRouteRef } from '../../routes';

@@ -1,1 +1,1 @@
-export { reportPortalPlugin } from './plugin';
+export { reportPortalPlugin as default } from './plugin';

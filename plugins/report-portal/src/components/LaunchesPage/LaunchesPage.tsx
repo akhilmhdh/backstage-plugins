@@ -4,8 +4,6 @@ import {
   Breadcrumbs,
   Content,
   Header,
-  HeaderIconLinkRow,
-  IconLinkVertical,
   Link,
   Page,
   useQueryParamState,
@@ -13,7 +11,6 @@ import {
 import { useRouteRef } from '@backstage/core-plugin-api';
 
 import { Button, makeStyles } from '@material-ui/core';
-import AssessmentIcon from '@material-ui/icons/Assessment';
 import Launch from '@material-ui/icons/Launch';
 
 import { projectsRouteRef, rootRouteRef } from '../../routes';

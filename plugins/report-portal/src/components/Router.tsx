@@ -1,8 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import { Content, PageWithHeader } from '@backstage/core-components';
-
 import { launchRouteRef, projectsRouteRef } from '../routes';
 import { LaunchesPage } from './LaunchesPage';
 import { ProjectsPage } from './ProjectsPage';
