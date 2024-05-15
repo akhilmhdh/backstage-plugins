@@ -4,6 +4,7 @@ import {
   createPlugin,
   createRoutableExtension,
   discoveryApiRef,
+  fetchApiRef,
 } from '@backstage/core-plugin-api';
 
 import { reportPortalApiRef, ReportPortalClient } from './api';
@@ -20,8 +21,10 @@ export const reportPortalPlugin = createPlugin({
       api: reportPortalApiRef,
       deps: {
         discovery: discoveryApiRef,
+        fetch: fetchApiRef,
       },
-      factory: ({ discovery }) => new ReportPortalClient(discovery),
+      factory: ({ discovery, fetch }) =>
+        new ReportPortalClient(discovery, fetch),
     }),
   ],
 });

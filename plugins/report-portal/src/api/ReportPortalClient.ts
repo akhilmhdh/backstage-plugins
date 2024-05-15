@@ -1,4 +1,4 @@
-import { DiscoveryApi } from '@backstage/core-plugin-api';
+import { DiscoveryApi, FetchApi } from '@backstage/core-plugin-api';
 
 import { ReportPortalApi } from './ReportPortalApi';
 import {
@@ -8,7 +8,10 @@ import {
 } from './types';
 
 export class ReportPortalClient implements ReportPortalApi {
-  constructor(private readonly discoveryApi: DiscoveryApi) {}
+  constructor(
+    private readonly discoveryApi: DiscoveryApi,
+    private readonly fetchApi: FetchApi,
+  ) {}
 
   private async getBaseApiUrl() {
     return `${await this.discoveryApi.getBaseUrl('report-portal')}/v1/`;
@@ -33,7 +36,7 @@ export class ReportPortalClient implements ReportPortalApi {
       );
     }
     baseUrl.searchParams.append('host', host);
-    const response = await fetch(baseUrl);
+    const response = await this.fetchApi.fetch(baseUrl);
     if (response.status !== 200) {
       throw new Error('Failed to fetch launch details');
     }
@@ -43,7 +46,7 @@ export class ReportPortalClient implements ReportPortalApi {
   async getProjectDetails(projectId: string, host: string) {
     const baseUrl = new URL(`project/${projectId}`, await this.getBaseApiUrl());
     baseUrl.searchParams.append('host', host);
-    const response = await fetch(baseUrl);
+    const response = await this.fetchApi.fetch(baseUrl);
     if (response.status !== 200) {
       throw new Error('Failed to fetch project details');
     }
@@ -61,7 +64,7 @@ export class ReportPortalClient implements ReportPortalApi {
       );
     }
     baseUrl.searchParams.append('host', host);
-    const response = await fetch(baseUrl);
+    const response = await this.fetchApi.fetch(baseUrl);
     if (response.status !== 200) {
       throw new Error('Failed to get instance details');
     }

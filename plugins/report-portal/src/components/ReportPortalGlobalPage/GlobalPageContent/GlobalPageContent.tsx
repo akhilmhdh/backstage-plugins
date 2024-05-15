@@ -3,9 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { Link, Table, TableColumn } from '@backstage/core-components';
 import { configApiRef, useApi, useRouteRef } from '@backstage/core-plugin-api';
 
-import { IconButton } from '@material-ui/core';
-import LaunchIcon from '@material-ui/icons/Launch';
-import { Skeleton } from '@material-ui/lab';
+import LaunchIcon from '@mui/icons-material/Launch';
+import IconButton from '@mui/material/IconButton';
+import Skeleton from '@mui/material/Skeleton';
 
 import { reportPortalApiRef } from '../../../api';
 import { useInstanceDetails } from '../../../hooks';
@@ -75,6 +75,7 @@ export const GlobalPageContent = () => {
           href={reportPortalApi.getReportPortalBaseUrl(rowData.instance)}
           rel="noreferrer noopener"
           target="_blank"
+          size="large"
         >
           <LaunchIcon />
         </IconButton>

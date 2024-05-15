@@ -8,7 +8,7 @@ import {
 } from '@backstage/plugin-catalog';
 import { EntityProvider } from '@backstage/plugin-catalog-react';
 
-import { Grid } from '@material-ui/core';
+import Grid from '@mui/material/Grid';
 
 import { mockEntity } from '../src/mocks';
 import { ReportPortalOverviewCard, reportPortalPlugin } from '../src/plugin';

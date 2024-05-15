@@ -10,8 +10,9 @@ import {
 } from '@backstage/core-components';
 import { useRouteRef } from '@backstage/core-plugin-api';
 
-import { Button, makeStyles } from '@material-ui/core';
-import Launch from '@material-ui/icons/Launch';
+import Launch from '@mui/icons-material/Launch';
+import Button from '@mui/material/Button';
+import makeStyles from '@mui/styles/makeStyles';
 
 import { projectsRouteRef, rootRouteRef } from '../../routes';
 import { LaunchesPageContent } from './LaunchesPageContent/LaunchesPageContent';

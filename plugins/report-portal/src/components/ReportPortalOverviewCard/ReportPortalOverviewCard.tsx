@@ -5,18 +5,26 @@ import { InfoCard, InfoCardVariants } from '@backstage/core-components';
 import { configApiRef, useApi } from '@backstage/core-plugin-api';
 import { useEntity } from '@backstage/plugin-catalog-react';
 
-import {
-  Divider,
-  Grid,
-  List,
-  ListItem,
-  ListItemSecondaryAction,
-  ListItemText,
-  makeStyles,
-  Theme,
-  Typography,
-} from '@material-ui/core';
-import { Skeleton } from '@material-ui/lab';
+// import {
+//   Divider,
+//   Grid,
+//   List,
+//   ListItem,
+//   ListItemSecondaryAction,
+//   ListItemText,
+//   Theme,
+//   Typography,
+// } from '@mui/material';
+import Divider from '@mui/material/Divider';
+import Grid from '@mui/material/Grid';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
+import ListItemText from '@mui/material/ListItemText';
+import Skeleton from '@mui/material/Skeleton';
+import { Theme } from '@mui/material/styles';
+import Typography from '@mui/material/Typography';
+import makeStyles from '@mui/styles/makeStyles';
 
 import { useLaunchDetails, useProjectDetails } from '../../hooks';
 import { isReportPortalAvailable } from '../../utils/isReportPortalAvailable';
@@ -53,7 +61,7 @@ const useStylesForDefect = makeStyles((theme: Theme) => ({
   },
 }));
 
-const DefectStatus = (props: { color: string; children: string }) => {
+const DefectStatus = (props: { color: string; children: any }) => {
   const classes = useStylesForDefect({ backgroundColor: props.color });
   return (
     <Typography
@@ -166,21 +174,21 @@ export const ReportPortalOverviewCard = (props: {
                   {
                     color: '#28b463',
                     value:
-                      (launchDetails!.statistics.executions.passed /
+                      ((launchDetails!.statistics.executions.passed ?? 0) /
                         launchDetails!.statistics.executions.total) *
                       100,
                   },
                   {
                     color: '#e74c3c',
                     value:
-                      (launchDetails!.statistics.executions.failed /
+                      ((launchDetails!.statistics.executions.failed ?? 0) /
                         launchDetails!.statistics.executions.total) *
                       100,
                   },
                   {
                     color: '#777777',
                     value:
-                      (launchDetails!.statistics.executions.skipped /
+                      ((launchDetails!.statistics.executions.skipped ?? 0) /
                         launchDetails!.statistics.executions.total) *
                       100,
                   },
@@ -192,17 +200,23 @@ export const ReportPortalOverviewCard = (props: {
             </Grid>
             <Grid item xs={4}>
               <Typography className={classes.results}>
-                Passed: {launchDetails!.statistics.executions.passed ?? 0}
+                <DefectStatus color="#28b463">
+                  Passed: {launchDetails!.statistics.executions.passed ?? 0}
+                </DefectStatus>
               </Typography>
             </Grid>
             <Grid item xs={4}>
               <Typography className={classes.results}>
-                Failed: {launchDetails!.statistics.executions.failed ?? 0}
+                <DefectStatus color="#e74c3c">
+                  Failed: {launchDetails!.statistics.executions.failed ?? 0}
+                </DefectStatus>
               </Typography>
             </Grid>
             <Grid item xs={4}>
               <Typography className={classes.results}>
-                Skipped: {launchDetails!.statistics.executions.skipped ?? 0}
+                <DefectStatus color="#777777">
+                  Skipped: {launchDetails!.statistics.executions.skipped ?? 0}
+                </DefectStatus>
               </Typography>
             </Grid>
           </>

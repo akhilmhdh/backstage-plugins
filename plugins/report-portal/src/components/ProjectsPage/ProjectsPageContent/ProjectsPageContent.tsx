@@ -8,9 +8,9 @@ import {
 } from '@backstage/core-components';
 import { configApiRef, useApi, useRouteRef } from '@backstage/core-plugin-api';
 
-import { IconButton } from '@material-ui/core';
-import Launch from '@material-ui/icons/Launch';
-import { Skeleton } from '@material-ui/lab';
+import Launch from '@mui/icons-material/Launch';
+import IconButton from '@mui/material/IconButton';
+import Skeleton from '@mui/material/Skeleton';
 
 import {
   ProjectDetails,
@@ -114,6 +114,7 @@ export const ProjectsPageContent = (props: { host: string }) => {
           target="_blank"
           rel="noopener noreferrer"
           href={`https://${host}/ui/#${row.projectName}/`}
+          size="large"
         >
           <Launch />
         </IconButton>

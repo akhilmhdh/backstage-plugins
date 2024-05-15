@@ -3,8 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { ErrorPanel, Table, TableColumn } from '@backstage/core-components';
 import { useApi } from '@backstage/core-plugin-api';
 
-import { IconButton, Link } from '@material-ui/core';
-import Launch from '@material-ui/icons/Launch';
+import Launch from '@mui/icons-material/Launch';
+import IconButton from '@mui/material/IconButton';
+import Link from '@mui/material/Link';
 import { DateTime } from 'luxon';
 
 import {
@@ -160,6 +161,7 @@ export const LaunchesPageContent = (props: {
           target="_blank"
           rel="noopener noreferrer"
           href={`https://${host}/ui/#${project}/launches/latest/${row.id}`}
+          size="large"
         >
           <Launch />
         </IconButton>
