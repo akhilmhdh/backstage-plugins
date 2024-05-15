@@ -1,8 +1,17 @@
 export interface Config {
   /**
    * Configuration values for Report Portal plugin
+   * @visibility frontend
    */
   reportPortal: {
+    /**
+     * Email to connect for adding more instances
+     * @visibility frontend
+     */
+    supportEmail: string;
+    /**
+     * @visibility frontend
+     */
     integrations: Array<{
       /**
        * Host of report portal url

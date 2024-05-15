@@ -5,4 +5,5 @@
  */
 
 export * from './dynamic/index';
-export * from './service/router';
+export { createRouter } from './service/router';
+export { reportPortalPlugin as default } from './plugin';

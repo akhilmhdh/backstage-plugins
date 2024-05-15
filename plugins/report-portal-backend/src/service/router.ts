@@ -1,20 +1,22 @@
 import { errorHandler } from '@backstage/backend-common';
+import { LoggerService } from '@backstage/backend-plugin-api';
 import { Config } from '@backstage/config';
 
 import express from 'express';
 import Router from 'express-promise-router';
 import { createProxyMiddleware } from 'http-proxy-middleware';
-import { Logger } from 'winston';
 
 export interface RouterOptions {
-  logger: Logger;
+  logger: LoggerService;
   config: Config;
 }
 
 export async function createRouter(
   options: RouterOptions,
 ): Promise<express.Router> {
-  const { config } = options;
+  const { config, logger } = options;
+
+  logger.info('Report portal backend plugin initialized');
   const hostsConfig = config.getConfigArray('reportPortal.integrations');
 
   const router = Router();
