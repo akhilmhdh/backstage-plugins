@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { IconComponent } from '@backstage/core-plugin-api';
 import { createDevApp } from '@backstage/dev-utils';
 import {
   EntityAboutCard,
@@ -9,9 +10,15 @@ import {
 import { EntityProvider } from '@backstage/plugin-catalog-react';
 
 import Grid from '@mui/material/Grid';
+import { getAllThemes } from '@redhat-developer/red-hat-developer-hub-theme';
 
+import { ReportPortalIcon } from '../src';
 import { mockEntity } from '../src/mocks';
-import { ReportPortalOverviewCard, reportPortalPlugin } from '../src/plugin';
+import {
+  ReportPortalGlobalPage,
+  ReportPortalOverviewCard,
+  reportPortalPlugin,
+} from '../src/plugin';
 
 const overviewContent = (
   <Grid container spacing={3} style={{ padding: '2rem' }} alignItems="stretch">
@@ -32,6 +39,13 @@ const overviewContent = (
 
 createDevApp()
   .registerPlugin(reportPortalPlugin)
+  .addThemes(getAllThemes())
+  .addPage({
+    icon: ReportPortalIcon as IconComponent,
+    title: 'Global Page',
+    path: '/report-portal',
+    element: <ReportPortalGlobalPage />,
+  })
   .addPage({
     element: (
       <EntityProvider entity={mockEntity}>{overviewContent}</EntityProvider>

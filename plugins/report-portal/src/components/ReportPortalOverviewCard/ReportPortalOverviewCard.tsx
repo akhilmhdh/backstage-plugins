@@ -5,16 +5,6 @@ import { InfoCard, InfoCardVariants } from '@backstage/core-components';
 import { configApiRef, useApi } from '@backstage/core-plugin-api';
 import { useEntity } from '@backstage/plugin-catalog-react';
 
-// import {
-//   Divider,
-//   Grid,
-//   List,
-//   ListItem,
-//   ListItemSecondaryAction,
-//   ListItemText,
-//   Theme,
-//   Typography,
-// } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
 import List from '@mui/material/List';
@@ -22,9 +12,8 @@ import ListItem from '@mui/material/ListItem';
 import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
 import ListItemText from '@mui/material/ListItemText';
 import Skeleton from '@mui/material/Skeleton';
-import { Theme } from '@mui/material/styles';
+import { styled, Theme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
-import makeStyles from '@mui/styles/makeStyles';
 
 import { useLaunchDetails, useProjectDetails } from '../../hooks';
 import { isReportPortalAvailable } from '../../utils/isReportPortalAvailable';
@@ -46,45 +35,39 @@ const HeaderComponent = (props: { total: number }) => {
 
 type Defect = { id: number; name: string; total: number; color: string };
 
-const useStylesForDefect = makeStyles((theme: Theme) => ({
-  status: {
-    '&::before': {
-      width: '0.7em',
-      height: '0.7em',
-      display: 'inline-block',
-      marginRight: theme.spacing(1),
-      borderRadius: '50%',
-      content: '""',
-      backgroundColor: (props: { backgroundColor: string }) =>
-        props.backgroundColor,
-    },
+const StyledTypography = styled(Typography, {
+  shouldForwardProp: prop => prop !== 'color',
+})(({ theme, color }) => ({
+  '&::before': {
+    width: '0.7em',
+    height: '0.7em',
+    display: 'inline-block',
+    marginRight: theme.spacing(1),
+    borderRadius: '50%',
+    content: '""',
+    backgroundColor: color,
   },
 }));
 
 const DefectStatus = (props: { color: string; children: any }) => {
-  const classes = useStylesForDefect({ backgroundColor: props.color });
   return (
-    <Typography
-      className={classes.status}
-      component="span"
+    <StyledTypography
+      color={props.color}
       aria-label="Status"
       aria-hidden="true"
     >
       {props.children}
-    </Typography>
+    </StyledTypography>
   );
 };
 
-const useStyles = makeStyles({
-  results: {
-    fontWeight: 'bold',
-  },
+const StyledResults = styled(Typography)({
+  '& > *': { fontWeight: '800' },
 });
 
 export const ReportPortalOverviewCard = (props: {
   variant: InfoCardVariants;
 }) => {
-  const classes = useStyles();
   const config = useApi(configApiRef);
   const hostsConfig = config.getConfigArray('reportPortal.integrations');
 
@@ -199,25 +182,25 @@ export const ReportPortalOverviewCard = (props: {
               />
             </Grid>
             <Grid item xs={4}>
-              <Typography className={classes.results}>
+              <StyledResults>
                 <DefectStatus color="#28b463">
                   Passed: {launchDetails!.statistics.executions.passed ?? 0}
                 </DefectStatus>
-              </Typography>
+              </StyledResults>
             </Grid>
             <Grid item xs={4}>
-              <Typography className={classes.results}>
+              <StyledResults>
                 <DefectStatus color="#e74c3c">
                   Failed: {launchDetails!.statistics.executions.failed ?? 0}
                 </DefectStatus>
-              </Typography>
+              </StyledResults>
             </Grid>
             <Grid item xs={4}>
-              <Typography className={classes.results}>
+              <StyledResults>
                 <DefectStatus color="#777777">
                   Skipped: {launchDetails!.statistics.executions.skipped ?? 0}
                 </DefectStatus>
-              </Typography>
+              </StyledResults>
             </Grid>
           </>
         )}
